@@ -40,3 +40,23 @@ export const getServerSideProps=async(context)=>{
     }
 
 }
+
+//Kullanım efekti, bileşeniniz monte edildikten sonra çalışacaktır, bu nedenle sayfanızın yüklendiğini ve ardından verilerin göründüğünü fark edeceksiniz.
+
+// Sunucu tarafı donanımları, sayfanızın halihazırda üzerinde bulunan verilerle yüklenmesini sağlar. Tecrübelerime göre, bu biraz daha hızlı yükleniyor.
+
+// Aradaki fark, sayfa zaten yüklendikten sonra bir anlık verinin belirdiğini fark etmemeniz ve html belgesinin önceden verilerle doldurularak çok daha iyi seo yapılmasına olanak sağlamasıdır.
+
+// Sadece useEffect kancası ile getStaticProps veya getServerSideProps kullanımı arasındaki bir şeyi açıklığa kavuşturmak istedim.
+
+// Next.js varsayılan olarak her sayfayı sunucu tarafında HTML olarak önceden işler ve yüklenmesi için tarayıcıya gönderir. Çoğu zaman, bir blog gönderisi listesi veya bir kullanıcının izinleri/rolleri gibi, işlenecek verileri almak için bazı API'lere bir HTTP isteğinde bulunmamız gerekir. Sayfa/bileşen içindeki useEffect kancasını kullanarak verileri getirseydik, birkaç şey yapıyor olurduk:
+
+// Önceden oluşturulmuş HTML'yi minimum JS ile geri gönderirdik ve bu JS, verilerimizle sunucuya bir HTTP isteği yapan useEffect kancasını içeren istemci tarafında yürütülür.
+
+// Alınan verilerle bir şeyler yapardık, genellikle onu işlerdik.
+
+// Yapmayacağımız şey:
+
+// Veri alma ve ön işleme için Next'in mekanizmasından yararlanma. Verileri useEffect içinde getirdiğimiz için, veriler bileşen bağlandıktan sonra alınır, bu nedenle istemci tarafında getirilmesi gerekir.
+
+// Devam ettim ve hem useEffect hem de getStaticProps ile deneyler yaptım. Verileri useEffect kancasının geri araması içinde aldıktan sonra oluşturduğumda, verilerin yaklaşık yarım saniye sonra göründüğünü fark ettim. Bunu getStaticProps kullanarak yaptığımda, veriler bir anda bir arada anında ortaya çıktı. Bunun nedeni, verilerin getirilmesi ve bileşenimizin şablonuna dayalı olarak oluşturulan HTML'ye ayrıştırılması ve ardından işlenmek üzere müşteriye tam bir belge olarak gönderilmesidir.
