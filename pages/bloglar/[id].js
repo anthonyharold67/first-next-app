@@ -60,3 +60,10 @@ export const getServerSideProps=async(context)=>{
 // Veri alma ve ön işleme için Next'in mekanizmasından yararlanma. Verileri useEffect içinde getirdiğimiz için, veriler bileşen bağlandıktan sonra alınır, bu nedenle istemci tarafında getirilmesi gerekir.
 
 // Devam ettim ve hem useEffect hem de getStaticProps ile deneyler yaptım. Verileri useEffect kancasının geri araması içinde aldıktan sonra oluşturduğumda, verilerin yaklaşık yarım saniye sonra göründüğünü fark ettim. Bunu getStaticProps kullanarak yaptığımda, veriler bir anda bir arada anında ortaya çıktı. Bunun nedeni, verilerin getirilmesi ve bileşenimizin şablonuna dayalı olarak oluşturulan HTML'ye ayrıştırılması ve ardından işlenmek üzere müşteriye tam bir belge olarak gönderilmesidir.
+
+//bu örnekte useEffect kullanmak daha poerformanslı.getServerSideProps u seo ile alakalı işlemlerde kullanabiliriz ama burada kullanmamıza gerek yok
+// Sayfanız sık sık güncellenen veriler içeriyorsa ve verileri önceden oluşturmanız gerekmiyorsa, istemci tarafında verileri getirebilirsiniz. Bunun bir örneği, kullanıcıya özel verilerdir:
+
+// İlk olarak, sayfayı veri olmadan hemen gösterin. Sayfanın bazı bölümleri, Statik Oluşturma kullanılarak önceden oluşturulabilir. Eksik veriler için yükleme durumlarını gösterebilirsiniz
+// Ardından, istemci tarafındaki verileri alın ve hazır olduğunuzda görüntüleyin.
+// Bu yaklaşım, örneğin kullanıcı kontrol paneli sayfaları için iyi çalışır. Pano özel, kullanıcıya özel bir sayfa olduğu için SEO alakalı değildir ve sayfanın önceden oluşturulmasına gerek yoktur. Veriler sık ​​sık güncellenir, bu da istek anında veri getirmeyi gerektirir.
